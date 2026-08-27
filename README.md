@@ -1,1 +1,1 @@
-# django-with-react
+# Nextjs + Supabase
