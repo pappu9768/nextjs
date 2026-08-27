@@ -13,20 +13,24 @@ export default function Home() {
     setSignUp({ ...signUp, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     console.log(signUp)
     try {
       setLoading(true)
-      const res = supabaseClient.auth.signUp({
+      const {data,error} = await supabaseClient.auth.signUp({
         
-        email:signUp.email,
+        email:signUp.email.trim(),
         password:signUp.password
       })
-      console.log(res);
-
+      if(error){
+        console.log(error)
+      }
+      console.log(data)
     } catch (error) {
       console.log(error)
+    }finally{
+      setLoading(false)
     }
   }
   return (
